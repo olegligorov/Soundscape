@@ -1,0 +1,126 @@
+:root {
+    font-family: sans-serif;
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0;
+    padding: 0;
+    --orangeColor: #E46249;
+    --lightColor: #faf8f6;
+    --darkColor: #111112;
+    --lighterDarkColor: #18181C;
+}
+
+.form-body {
+    margin: 0px;
+    padding: 3rem 10rem;
+}
+
+body {
+    margin: 0px;
+    background-color: var(--darkColor);
+
+}
+
+.form-body {
+    color: var(--lightColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-heading-text {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-heading-text p,h2 {
+    margin: 5px;
+}
+
+form {
+    display: flex;
+}
+
+.registration_form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.input-container input {
+    background-color: #2F2F2F;
+    border: none;
+    border-radius: 6px;
+    height: 30px;
+    color: var(--lightColor);
+    padding: 0 8px;
+}
+
+.input-container input:focus {
+    border: none;
+    color: var(--lightColor);
+    outline: none;
+}
+
+
+.input-container label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+#submit-btn {
+    background-color: rgba(28, 28, 28, 0.8);
+    border: none;
+    height: 30px;
+    color: var(--lightColor);
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+#submit-btn:hover {
+    background-color: rgba(28, 28, 28, 0.9);
+}
+
+.submit-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#error {
+    width: 100%;
+    color: red;
+    margin: 0;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.backend_error span {
+    color: red;
+    margin-bottom: 20px;
+}
+
+a, a:visited {
+    color: var(--lightColor);
+    text-decoration: none;
+}
+
+.soundscape-small-logo {
+    margin-top: 28px;
+    height: 30px;
+    margin-left: 50px;
+}
