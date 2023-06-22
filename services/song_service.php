@@ -14,7 +14,7 @@ class SongService
         $this->conn = $this->db->getConnection();
     }
 
-    function fetch_paged_songs($pageNumber, $pageSize)
+    function fetch_paged_videos($pageNumber, $pageSize)
     {
         $offset = ($pageNumber - 1) * $pageSize;
 
@@ -53,10 +53,42 @@ class SongService
         return $fetched_songs;
     }
 
+    function search_videos($string)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM songs where name like '%$string%'");
+        $stmt->execute();
+
+        $fetched_songs = [];
+
+        while ($row = $stmt->fetch()) {
+
+            $song = new Song(
+                $row["song_id"],
+                $row["artist"],
+                $row["danceability"],
+                $row["energy"],
+                $row["key_feature"],
+                $row["loudness"],
+                $row["speechiness"],
+                $row["acousticness"],
+                $row["instrumentalness"],
+                $row["liveness"],
+                $row["valence"],
+                $row["tempo"],
+                $row["length"],
+                $row["songUrl"],
+                $row["name"],
+                $row["youtube_song_id"]
+            );
+            array_push($fetched_songs, $song);
+        }
+
+        return $fetched_songs;
+    }
+
 
     function read_songs_from_file($filename)
     {
-
         // check whether the database is empty
         $stmt = $this->conn->prepare("SELECT song_id FROM songs limit 10");
         $stmt->execute();
@@ -211,5 +243,53 @@ class SongService
         } else {
             return "";
         }
+    }
+
+    function get_user_most_viewed_videos($user_id)
+    {
+        //         SELECT songs.song_id, songs.name, listened_songs.times_listened
+        // FROM songs
+        // INNER JOIN listened_songs ON songs.song_id = listened_songs.song_id
+        // WHERE listened_songs.user_id = 12
+        // ORDER BY listened_songs.times_listened DESC;
+
+        $stmt = $this->conn->prepare("SELECT songs.song_id, songs.youtube_song_id, songs.name, songs.artist, listened_songs.times_listened
+        FROM songs
+        INNER JOIN listened_songs ON songs.song_id = listened_songs.song_id
+        WHERE listened_songs.user_id = $user_id
+        ORDER BY listened_songs.times_listened DESC;");
+        $stmt->execute();
+
+        $fetched_videos = [];
+
+        while ($row = $stmt->fetch()) {
+            $video = new ViewedVideo($row["song_id"], $row["name"], $row["artist"], $row["times_listened"], $row["youtube_song_id"]);
+            array_push($fetched_videos, $video);
+        }
+
+        return $fetched_videos;
+    }
+}
+
+class ViewedVideo {
+    public $video_id;
+    public $name;
+    public $artist;
+    public $times_listened;
+    public $youtube_id;
+
+    function __construct($video_id, $name, $artist, $times_listened, $youtube_id) {
+        $this->video_id = $video_id;
+        $this->name = $name;
+        $this->artist = $artist;
+        $this->times_listened = $times_listened;
+        $this->youtube_id = $youtube_id;
+    }
+
+    function get_youtube_thumbnail()
+    {
+        $video_id = $this->youtube_id;
+        $thumbnail_url = "https://img.youtube.com/vi/$video_id/0.jpg";
+        return $thumbnail_url;
     }
 }

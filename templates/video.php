@@ -70,10 +70,6 @@ $song = $song_service->get_song_by_id($song_id);
               <span>Home</span>
             </a>
           </li>
-          <li class="navigation_item">
-            <img src="../static/images/search.svg" alt="sarch" class="navigation_icon">
-            <span>Search</span>
-          </li>
         </ul>
       </nav>
 
@@ -83,7 +79,7 @@ $song = $song_service->get_song_by_id($song_id);
       <div class="heading">
         <p>
           <?php
-          echo "Welcome " . $user['name'];
+          echo "";
           ?>
         </p>
         <button class="logout_btn"><a href="../modules/logout.php">Logout</a></button>
