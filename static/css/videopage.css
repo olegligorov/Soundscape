@@ -1,0 +1,38 @@
+a, a:visited {
+    color: var(--lightColor);
+    text-decoration: none;
+}
+
+:root {
+    margin: 0;
+}
+
+.main_video {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0px 1px 40px #303030);
+}
+
+h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+h4 {
+    color: silver;
+    margin: 0;
+}
+
+iframe {
+    border-radius: 5px;
+    width: 660px;
+    height: 415px;
+}
+
+.main_video_section {
+    display: flex;
+    justify-content: center;
+    height: 90%;
+}

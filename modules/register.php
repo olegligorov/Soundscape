@@ -47,9 +47,6 @@ function register($name, $email, $password, $conn)
     }
 }
 
-
-
-
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];

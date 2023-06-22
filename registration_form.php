@@ -46,7 +46,9 @@
         <?php if (isset($_GET['error'])) : ?>
           <span><?php echo $_GET['error']; ?></span>
         <?php endif; ?>
-
+      </div>
+      
+      <div id="error" class="error">
       </div>
 
       <div class="submit-btn-container">

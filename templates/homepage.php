@@ -1,5 +1,7 @@
 <?php
 include('../services/user_service.php');
+include('../services/song_service.php');
+
 $user_id = $_SESSION["currentUser"];
 
 if (!$user_id) {
@@ -8,6 +10,10 @@ if (!$user_id) {
 }
 
 $user = fetch_user_data($user_id);
+$song_service = new SongService();
+$videos = [];
+// $song_service->read_songs_from_file("../static/top_1000_dataset.csv");
+
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +53,27 @@ $user = fetch_user_data($user_id);
       <div class="heading">
         <p>
           <?php
-          echo "Wellcome " . $user['name'];
+          echo "Welcome " . $user['name'];
           ?>
         </p>
+
         <button class="logout_btn"><a href="../modules/logout.php">Logout</a></button>
+      </div>
+
+      <div class="video-container">
+        <?php
+        $videos = array_merge($videos, $song_service->fetch_paged_songs(1, 20));
+
+        foreach ($videos as $video) {
+          echo "<div class='video'>
+              <a href='./video.php?id={$video->id}'>
+                <img class='video_thumbnail' src='{$video->get_youtube_thumbnail()}' alt='Youtube thumbnail'></img>
+                </a>
+                <p class='video_name'>$video->title</p>
+                <p class='video_creator'>$video->artist</p>
+              </div>";
+        }
+        ?>
       </div>
 
 

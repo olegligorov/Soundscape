@@ -37,6 +37,8 @@ html,body {
 .left-section {
     flex: 1;
     background-color: var(--lighterDarkColor);
+    position: sticky;
+    top: 0;
 }
 
 .right-section {
@@ -94,4 +96,36 @@ p {
     justify-content: center;
     align-items: center;
     justify-content: space-between;
+}
+
+.video-container {
+    margin-left: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+}
+
+.video_thumbnail {
+    border-radius: 10px;
+    max-width: 250px;
+}
+
+.video {
+    max-width: 250px;
+}
+
+.video_name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.video_creator {
+    font-size: 12px;
+    color: silver;
+}
+
+a, a:visited {
+    color: var(--lightColor);
+    text-decoration: none;
 }
