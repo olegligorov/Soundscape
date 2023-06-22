@@ -70,6 +70,12 @@ $song = $song_service->get_song_by_id($song_id);
               <span>Home</span>
             </a>
           </li>
+          <li class="navigation_item">
+            <img src="../static/images/stats.svg" alt="home" class="navigation_icon">
+            <a href="statistics.php">
+              <span>Statistics</span>
+            </a>
+          </li>
         </ul>
       </nav>
 

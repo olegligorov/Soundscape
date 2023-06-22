@@ -43,7 +43,7 @@ $videos = [];
           </li>
           
           <li class="navigation_item">
-            <img src="../static/images/home.svg" alt="home" class="navigation_icon">
+            <img src="../static/images/stats.svg" alt="home" class="navigation_icon">
             <a href="statistics.php">
               <span>Statistics</span>
             </a>

@@ -24,6 +24,7 @@ $videos = [];
     <title>Document</title>
     <link rel="stylesheet" href="../static/css/homepage.css" />
     <link rel="stylesheet" href="../static/css/statistics.css" />
+
 </head>
 
 <body>
@@ -43,7 +44,7 @@ $videos = [];
                         </a>
                     </li>
                     <li class="navigation_item">
-                        <img src="../static/images/home.svg" alt="home" class="navigation_icon">
+                        <img src="../static/images/stats.svg" alt="home" class="navigation_icon">
                         <a href="statistics.php">
                             <span>Statistics</span>
                         </a>
@@ -65,15 +66,17 @@ $videos = [];
             <div class="statistics-container">
 
                 <div>
-                    <?php 
+                    <?php
                     $videos = $song_service->get_user_most_viewed_videos($user_id);
                     $total_watched_videos = 0;
-                    foreach($videos as $video) {
-                        $total_watched_videos += 1;
-                    }
 
-                    echo '<h3> You have played '. $total_watched_videos.' videos in total</h3>';
-                
+                    $videos_played = [];
+
+                    foreach ($videos as $video) {
+                        $total_watched_videos += 1;
+                        $videos_played += [$video->name => $video->times_listened];
+                    }
+                    echo '<h3> You have played ' . $total_watched_videos . ' videos in total</h3>';
 
                     ?>
                 </div>
@@ -100,8 +103,7 @@ $videos = [];
         </section>
 
     </main>
-
-
+    
 </body>
 
 </html>
