@@ -29,3 +29,30 @@ h4,h1 {
 .viewed_video_creator {
     font-size: 14px;
 }
+
+.charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-container {
+    /* width: 500px; */
+    /* max-height: 350px; */
+    margin: 2rem 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#barChartContainer {
+    width: 500px;
+}
+
+#pieChartContainer canvas {
+    width: 450px;
+}

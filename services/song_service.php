@@ -1,8 +1,6 @@
 <?php
-// include ('../modules/db.php');
 include('../models/Song.php');
 
-// TODO: create a class and have a constructor that creates the database and methods that fetch from the db
 class SongService
 {
     private $db;
@@ -44,9 +42,6 @@ class SongService
                 $row["youtube_song_id"]
             );
 
-
-            // echo "<div>{$song->title}</div>";
-
             array_push($fetched_songs, $song);
         }
 
@@ -86,6 +81,58 @@ class SongService
         return $fetched_songs;
     }
 
+    function get_top_artists($user_id, $limit)
+    {
+        $stmt = $this->conn->prepare("SELECT artist, SUM(times_listened) AS play_count
+                                     FROM songs
+                                     INNER JOIN listened_songs ON songs.song_id = listened_songs.song_id
+                                     WHERE listened_songs.user_id = :user_id
+                                     GROUP BY artist
+                                     ORDER BY play_count DESC
+                                     LIMIT :limit");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $topArtists = [];
+
+        while ($row = $stmt->fetch()) {
+            $artist = $row['artist'];
+            $playCount = $row['play_count'];
+
+            $topArtists[] = array(
+                'artist' => $artist,
+                'play_count' => $playCount
+            );
+        }
+
+        return $topArtists;
+    }
+
+    function get_tempos($user_id){
+        $stmt = $this->conn->prepare("SELECT tempo, SUM(times_listened) AS play_count
+                                    FROM songs
+                                    INNER JOIN listened_songs ON songs.song_id = listened_songs.song_id
+                                    WHERE listened_songs.user_id = :user_id
+                                    GROUP BY tempo");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        $tempos = [];
+
+        while ($row = $stmt->fetch()) {
+            $tempo = $row['tempo'];
+            $playCount = $row['play_count'];
+
+            if (array_key_exists($tempo, $tempos)) {
+                $tempos[$tempo] += $playCount;
+            } else {
+                $tempos[$tempo] = $playCount;
+            }
+        }
+
+        return $tempos;
+    }
 
     function read_songs_from_file($filename)
     {
@@ -105,7 +152,6 @@ class SongService
 
             // Read the remaining rows
             while (($row = fgetcsv($file)) !== false) {
-                // Output each value
                 $artist = $row[0];
                 $danceability = $row[1];
                 $energy = $row[2];
@@ -147,7 +193,6 @@ class SongService
                 }
             }
 
-            // Close the file
             fclose($file);
         } else {
             echo "Failed to open the file.";
