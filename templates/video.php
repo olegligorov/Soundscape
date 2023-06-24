@@ -18,7 +18,6 @@ function view_video($video_id)
   
   $result = "Video " . $video_id . " viewed by ".$user_id;
   return $result;
-  
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'view_video') {

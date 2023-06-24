@@ -36,7 +36,7 @@ function playVideo() {
 
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MusicProxy/templates/video.php',
+        url: 'http://localhost/Soundscape/templates/video.php',
         data: { action: 'view_video', video_id: videoId },
         success: function (response) {
             console.log(response);

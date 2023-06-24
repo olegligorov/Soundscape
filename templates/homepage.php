@@ -71,8 +71,6 @@ $videos = [];
         <button class="logout_btn"><a href="../modules/logout.php">Logout</a></button>
       </div>
 
-
-
       <div class="video-container">
         <?php
 
